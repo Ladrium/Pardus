@@ -5,7 +5,7 @@ module.exports = class Template extends Command {
 	constructor(bot) {
 		super(bot, {
 			name:"userinfo",
-			aliases:["info", "ui", "profile"],
+			aliases:["whois", "ui", "profile"],
 			category:"Info",
 			usage:"!userinfo <User> or !userinfo bio <bio>",
 			description:"Shows the userinfo of a user",
@@ -39,7 +39,7 @@ module.exports = class Template extends Command {
 			.setThumbnail(member.user.displayAvatarURL)
 			.setAuthor(`${member.user.username}'s information`, member.user.displayAvatarURL)
 			.addField("Personal Information", `**Nickname:** ${member.displayName}\n**Discriminator:** #${member.user.discriminator}\n**ID:** ${member.user.id}\n**Bot:** ${user.bot ? "✅" : "❌"}\n **Status:** ${statuses[member.user.presence.status]}\n**Game:** ${member.user.presence.game ? member.user.presence.game : "No Game"}`)
-			.addField("Server Informations", `**Join Date:** ${moment.utc(member.joinedAt).format("dddd, MMMM Do YYYY")}\n**Creation Date:** ${moment.utc(member.user.createdAt).format("dddd, MMMM, Do YYYY")}\n**Roles:**${member.roles.filter(f => f.name !== "@everyone").map(x => x).join(", ")}`);
+			.addField("Server Information", `**Join Date:** ${moment.utc(member.joinedAt).format("dddd, MMMM Do YYYY")}\n**Creation Date:** ${moment.utc(member.user.createdAt).format("dddd, MMMM, Do YYYY")}\n**Roles:**${member.roles.filter(f => f.name !== "@everyone").map(x => x).join(", ")}`);
 		if(user.bio) userEmbed.addField("Bio", user.bio);
 		message.channel.send(userEmbed);
 	}

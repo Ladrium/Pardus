@@ -1,4 +1,6 @@
-module.exports = (bot) => {
+const wait = require("util").promisify(setTimeout);
+module.exports = async (bot) => {
+	await wait(5000);
 	setInterval(() =>
 		setStatus(["my Master", "the Admins"]), 60000);
 	bot.helpEmbed = bot.botEmbed(undefined, bot)
