@@ -2,18 +2,15 @@ const { RichEmbed } = require("discord.js");
 module.exports = {
 	findMember: async (message, toFind) => {
 		let member;
-		if(message.mentions.members.size == 0 && message.mentions.users.size > 0) {
+		if(message.mentions && message.mentions.members.size == 0 && message.mentions.users.size > 0) {
 			const toFetch = await message.guild.fetchMember(message.mentions.users.first());
 			member = toFetch;
 		}
+
 		else{
+			if(!toFind) return message.member;
 			toFind = toFind.toLowerCase();
-			member = message.guild.members.find((x) => x.name === toFind) || message.guild.members.get(toFind);
-			if(!member) {
-				let filter = message.guild.members.filter((tMember) => tMember.user.tag.toLowerCase().includes(toFind.toLowerCase()) || tMember.id == toFind || tMember.displayName.toLowerCase().includes(toFind.toLowerCase()));
-				if (filter.size > 1) member = filter.array();
-				else member = filter.array()[0];
-			}
+			member = message.mentions.members.first() || message.guild.members.find((x) => x.user.username.toLowerCase() === toFind) || message.guild.members.get(toFind);
 		}
 		return member;
 	},

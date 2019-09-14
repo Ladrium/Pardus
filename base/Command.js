@@ -7,6 +7,7 @@ class Command {
 		this.usage = data.usage || this.name;
 		this.description = data.description;
 		this.example = data.example;
+		this.cooldown = data.cooldown;
 	}
 }
 module.exports = Command;

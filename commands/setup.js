@@ -2,7 +2,6 @@
 "use strict";
 const CTemp = require("../base/Command");
 const { ErrorMsg, findRole, findChannel } = require("../functions");
-const GuildSetup = require("../models/guildSettings");
 class Setup extends CTemp {
 	constructor(bot) {
 		super(bot, {
@@ -13,11 +12,10 @@ class Setup extends CTemp {
 			usage:"!setup",
 		});
 	}
-	async run(message, args) {
+	run(message, args, guild) {
 		if(!message.member.hasPermission("MANAGE_GUILD", false, true, true)) return ErrorMsg(this.bot, message, "You need the permission: Manage Server to execute this command!");
-		const guild = await GuildSetup.findOne({ guildID: message.guild.id });
 		if(!args[0]) return message.channel.send(this.bot.setupEmbed);
-		if(!["autorole", "staffrole", "welcomemessage", "leavemessage", "staffrole", "prefix"].includes(args[0].toLowerCase())) return message.channel.send(this.bot.setupEmbed);
+		if(!["autorole", "staffrole", "welcomemessage", "leavemessage", "staffrole", "prefix", "logchannel"].includes(args[0].toLowerCase())) return message.channel.send(this.bot.setupEmbed);
 		let toSetup = args[0].toLowerCase();
 		if(toSetup === "welcomemessage") {
 			if(!args[1]) return ErrorMsg(this.bot, message, "You need to provide a channel!");
@@ -26,6 +24,8 @@ class Setup extends CTemp {
 			guild.welcomeChannel = channel.id;
 			if(!args[2]) return;
 			guild.welcomeMessage = args.slice(2).join(" ");
+			message.reply(`Sucessfully set the WelcomeMessage to ${args.slice(2).join(" ")} and the LeaveChannel to ${channel.name}!`);
+
 		}
 		else if(toSetup === "leavemessage") {
 			if(!args[1]) return ErrorMsg(this.bot, message, "You need to provide a channel!");
@@ -34,6 +34,7 @@ class Setup extends CTemp {
 			guild.leaveChannel = channel.id;
 			if(!args[2]) return;
 			guild.leaveMessage = args.slice(2).join(" ");
+			message.reply(`Sucessfully set the LeaveMessage to ${args.slice(2).join(" ")} and the LeaveChannel to ${channel.name}!`);
 		}
 		else if(toSetup === "autorole") {
 			if(!args[1]) return ErrorMsg(this.bot, message, "Do you want to Remove or Add one?");
@@ -42,15 +43,15 @@ class Setup extends CTemp {
 			if(!role) return ErrorMsg(this.bot, message, "Couldn't find that role!");
 			if(args[1].toLowerCase() === "remove") {
 				if(!guild.autoroles.includes(role.id)) return ErrorMsg(this.bot, message, "That role isn't set up as an auto role!");
-				guild.autoroles = guild.autoroles.join(" ").replace(role.id, "").split(" ");
+				guild.autoroles = guild.autoroles.splice(guild.autorole.findIndex((x) => x === role.id));
 				guild.save().catch();
-				message.reply("Successfully removed the role!");
+				message.reply("Successfully removed the role " + role.name + "!");
 			}
 			if(args[1].toLowerCase() === "add") {
 				if(guild.autoroles.includes(role.id)) return ErrorMsg(this.bot, message, "That role is already added as a Auto Role!");
 				guild.autoroles = [...guild.autoroles, role.id];
 				guild.save().catch(console.error);
-				message.reply("Successfully added the role!");
+				message.reply("Successfully added the role " + role.name + "!");
 
 			}
 		}
@@ -61,16 +62,30 @@ class Setup extends CTemp {
 			if(!role) return ErrorMsg(this.bot, message, "Couldn't find that role!");
 			if(args[1].toLowerCase() === "remove") {
 				if(!guild.staffRoles.includes(role.id)) return ErrorMsg(this.bot, message, "That role isn't set up as a staff role!");
-				guild.staffRoles = guild.staffRoles.join(" ").replace(role.id, "").split(" ");
+				guild.staffRoles = guild.staffRoles.splice(guild.staffRoles.findIndex((x => x === role.id)));
 				guild.save().catch();
-				message.reply("Successfully removed the role!");
+				message.reply("Successfully removed the role " + role.name + "!");
 			}
 			if(args[1].toLowerCase() === "add") {
 				if(guild.staffRoles.includes(role.id)) return ErrorMsg(this.bot, message, "That role is already added as a Staff Role!");
 				guild.staffRoles = [...guild.staffRoles, role.id];
 				guild.save().catch(console.error);
-				message.reply("Successfully added the role!");
+				message.reply("Successfully added the role " + role.name + "!");
 			}
+		}
+		else if(toSetup === "prefix") {
+			if(!args[1]) return ErrorMsg(this.bot, message, "Please provide a new prefix!");
+			guild.prefix = args[1];
+			message.reply("Successfully set the prefix to " + args[1] + " !");
+			guild.save().catch(console.error);
+		}
+		else if(toSetup === "logchannel") {
+			if(!args[1]) return ErrorMsg(this.bot, message, "Please provide a channel!");
+			const channel = findChannel(message, args.slice(1).join(" "));
+			if(!channel) return message.reply("Couldn't find that channel!");
+			guild.logChannel = channel.id;
+			message.reply("Successfully set the LogChannel to " + channel.name + "!");
+			guild.save().catch(console.error);
 		}
 		else{
 			message.channel.send(this.bot.setupEmbed);

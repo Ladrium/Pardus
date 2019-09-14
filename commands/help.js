@@ -3,7 +3,7 @@ class Help extends CTemp {
 	constructor(bot) {
 		super(bot, {
 			name: "help",
-			category:"Utility",
+			category:"Info",
 			description:"Use this command to gain information about the commands!",
 			example:"!help setup",
 			usage:"!help (command)",
@@ -14,14 +14,14 @@ class Help extends CTemp {
 		const helpEmbed = this.bot.botEmbed(message, this.bot)
 			.setTitle("Help")
 			.setFooter(this.bot.user.tag, message.author.displayAvatarURL);
-		let commands = this.bot.commands;
+		const commands = this.bot.commands;
 		if(!args[0] || !commands.has(args[0])) return message.channel.send(this.bot.helpEmbed);
 		else getCmd(args[0]);
 		message.channel.send(helpEmbed);
 		function getCmd(commandName) {
 			let info = "";
-			let command = commands.get(commandName);
-			let newName = commandName.charAt(0).toUpperCase() + commandName.slice(1);
+			const command = commands.get(commandName);
+			const newName = commandName.charAt(0).toUpperCase() + commandName.slice(1);
 			helpEmbed.setTitle(newName);
 			info += `**Category**: ${command.category}`;
 			if(command.aliases.length > 0) info += `\n**Aliases**: ${command.aliases.map(x => `\`\`${x}\`\``).join(", ")}`;

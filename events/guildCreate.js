@@ -4,12 +4,19 @@ module.exports = (bot, guild) => {
 		guildID: guild.id,
 		staffRoles: [],
 		logChannel: "logs",
-		leaveMessage: "no",
-		leaveChannel: "no",
-		welcomeMessage: "no",
-		welcomeChannel: "no",
+		leave:{
+			enabled: false,
+			channel: "",
+			message: "",
+		},
+		welcome:{
+			enabled: false,
+			channel: "",
+			message: "",
+		},
 		prefix: "!",
 		autoroles: [],
+		case: 0,
 	});
 	newGuild.save().catch(console.error);
 };
