@@ -29,9 +29,9 @@ module.exports = class Run extends CTemp {
 		else{
 			let embed;
 			try{
-				let codein = args.join(" ");
+				const codein = args.join(" ");
 				let code = eval(codein);
-				let ctype = typeof code;
+				const ctype = typeof code;
 				if (typeof code !== "string") {
 					code = require("util").inspect(code, {
 						depth: 0,

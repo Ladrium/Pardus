@@ -4,7 +4,7 @@ const { config } = require("dotenv");
 const mongoose = require("mongoose");
 ["command", "event"].forEach(x => require(`./handlers/${x}`)(bot));
 config({
-	path: `${__dirname}/../.env`,
+	path: `${__dirname}/.env`,
 });
 mongoose.connect(process.env.LOGINURI, { useNewUrlParser: true });
 Array.prototype.random = function(count) {

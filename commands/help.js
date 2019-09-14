@@ -9,7 +9,6 @@ class Help extends CTemp {
 			usage:"!help (command)",
 		});
 	}
-
 	run(message, args) {
 		const helpEmbed = this.bot.botEmbed(message, this.bot)
 			.setTitle("Help")

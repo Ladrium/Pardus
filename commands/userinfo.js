@@ -23,7 +23,7 @@ module.exports = class Template extends Command {
 			message.delete(5001);
 			return message.reply(`Successfully set your bio to ${args.slice(1).join(" ")}!`).then(msg => msg.delete(5000));
 		}
-		let member = message.mentions.members.first() || message.guild.members.get(args.join(" ")) || message.member;
+		const member = message.mentions.members.first() || message.guild.members.get(args.join(" ")) || message.member;
 		const user = await User.findOne({ userID: member.user.id }) || await new User({ userID: message.author.id, premium: false, developer: false });
 		const online = this.bot.emojis.get("577175605787885574");
 		const idle = this.bot.emojis.get("577175581876158485");

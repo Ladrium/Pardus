@@ -3,8 +3,8 @@ module.exports = (bot) => {
 		setStatus(["my Master", "the Admins"]), 60000);
 	bot.helpEmbed = bot.botEmbed(undefined, bot)
 		.setTitle("Help");
-	let commands = bot.commands;
-	let categories = commands
+	const commands = bot.commands;
+	const categories = commands
 		.map((c) => c.category)
 		.reduce((a, b) => {
 			if (a.indexOf(b) < 0) a.push(b);
@@ -12,7 +12,7 @@ module.exports = (bot) => {
 		}, [])
 		.sort();
 	categories.forEach((category) => {
-		let cateCmds = commands.filter((f) => f.category === category);
+		const cateCmds = commands.filter((f) => f.category === category);
 		bot.helpEmbed.addField(category, cateCmds.map(x =>`\`\`${x.name}\`\``).join(", "));
 	});
 	bot.setupEmbed = bot.botEmbed(undefined, bot)

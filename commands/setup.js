@@ -16,7 +16,7 @@ class Setup extends CTemp {
 		if(!message.member.hasPermission("MANAGE_GUILD", false, true, true)) return ErrorMsg(this.bot, message, "You need the permission: Manage Server to execute this command!");
 		if(!args[0]) return message.channel.send(this.bot.setupEmbed);
 		if(!["autorole", "staffrole", "welcomemessage", "leavemessage", "staffrole", "prefix", "logchannel"].includes(args[0].toLowerCase())) return message.channel.send(this.bot.setupEmbed);
-		let toSetup = args[0].toLowerCase();
+		const toSetup = args[0].toLowerCase();
 		if(toSetup === "welcomemessage") {
 			if(!args[1]) return ErrorMsg(this.bot, message, "You need to provide a channel!");
 			const channel = findChannel(message.mentions.channels.first() || args[1]);
