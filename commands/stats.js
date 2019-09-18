@@ -22,7 +22,7 @@ module.exports = class Stats extends CTemp {
             **Created At:** ${utc(Owner.createdAt).format("dddd, MM Do YYYY")}`)
 			.addField("General Information", `**Tag:** ${this.bot.user.tag}
             **ID:** ${this.bot.user.id}
-            **Guild's Prefix:** ${guild.prefix}
+            **Server Prefix:** ${guild.prefix}
             **Created At:** ${utc(this.bot.user.createdAt).format("dddd, MM Do YYYY")}
             **Language:** JavaScript - Discord.Js`)
 			.addField("Statistics", `**Api Ping:** ${this.bot.ping}

@@ -5,7 +5,7 @@ module.exports = class Run extends CTemp {
 	constructor(bot) {
 		super(bot, {
 			name: "run",
-			aliases: ["exec"],
+			aliases: ["exec", "eval"],
 			category: "Developer",
 			description: "Use this command to run a code!",
 			usage: "!run <code>",
@@ -30,7 +30,7 @@ module.exports = class Run extends CTemp {
 			let embed;
 			try{
 				const codein = args.join(" ");
-				let code = eval(codein);
+				let code = await eval(codein);
 				const ctype = typeof code;
 				if (typeof code !== "string") {
 					code = require("util").inspect(code, {

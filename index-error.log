@@ -1,0 +1,77 @@
+(node:2555) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+(node:4393) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+{ DiscordAPIError: Cannot send an empty message
+    at item.request.gen.end (/root/Pardus/node_modules/discord.js/src/client/rest/RequestHandlers/Sequential.js:85:15)
+    at then (/root/Pardus/node_modules/snekfetch/src/index.js:215:21)
+    at processTicksAndRejections (internal/process/task_queues.js:86:5)
+  name: 'DiscordAPIError',
+  message: 'Cannot send an empty message',
+  path: '/api/v7/channels/613830212190339098/messages',
+  code: 50006,
+  method: 'POST' }
+(node:4541) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+(node:4641) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+(node:4743) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+TypeError: Cannot read property 'filter' of undefined
+    at module.exports (/root/Pardus/events/guildMemberAdd.js:9:32)
+    at processTicksAndRejections (internal/process/task_queues.js:86:5)
+TypeError: Cannot read property 'filter' of undefined
+    at module.exports (/root/Pardus/events/guildMemberAdd.js:9:32)
+    at processTicksAndRejections (internal/process/task_queues.js:86:5)
+TypeError: Cannot read property 'filter' of undefined
+    at module.exports (/root/Pardus/events/guildMemberAdd.js:9:32)
+    at processTicksAndRejections (internal/process/task_queues.js:86:5)
+TypeError: Cannot read property 'filter' of undefined
+    at module.exports (/root/Pardus/events/guildMemberAdd.js:9:32)
+    at processTicksAndRejections (internal/process/task_queues.js:86:5)
+ReferenceError: guild is not defined
+    at module.exports (/root/Pardus/events/message.js:7:87)
+    at CSClient.emit (events.js:193:13)
+    at MessageCreateHandler.handle (/root/Pardus/node_modules/discord.js/src/client/websocket/packets/handlers/MessageCreate.js:9:34)
+    at WebSocketPacketManager.handle (/root/Pardus/node_modules/discord.js/src/client/websocket/packets/WebSocketPacketManager.js:105:65)
+    at WebSocketConnection.onPacket (/root/Pardus/node_modules/discord.js/src/client/websocket/WebSocketConnection.js:333:35)
+    at WebSocketConnection.onMessage (/root/Pardus/node_modules/discord.js/src/client/websocket/WebSocketConnection.js:296:17)
+    at WebSocket.onMessage (/root/Pardus/node_modules/ws/lib/event-target.js:120:16)
+    at WebSocket.emit (events.js:193:13)
+    at Receiver.receiverOnMessage (/root/Pardus/node_modules/ws/lib/websocket.js:789:20)
+    at Receiver.emit (events.js:193:13)
+    at Receiver.dataMessage (/root/Pardus/node_modules/ws/lib/receiver.js:422:14)
+    at Receiver.getData (/root/Pardus/node_modules/ws/lib/receiver.js:352:17)
+    at Receiver.startLoop (/root/Pardus/node_modules/ws/lib/receiver.js:138:22)
+    at Receiver._write (/root/Pardus/node_modules/ws/lib/receiver.js:74:10)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)
+ReferenceError: guild is not defined
+    at module.exports (/root/Pardus/events/message.js:7:87)
+    at CSClient.emit (events.js:193:13)
+    at MessageCreateHandler.handle (/root/Pardus/node_modules/discord.js/src/client/websocket/packets/handlers/MessageCreate.js:9:34)
+    at WebSocketPacketManager.handle (/root/Pardus/node_modules/discord.js/src/client/websocket/packets/WebSocketPacketManager.js:105:65)
+    at WebSocketConnection.onPacket (/root/Pardus/node_modules/discord.js/src/client/websocket/WebSocketConnection.js:333:35)
+    at WebSocketConnection.onMessage (/root/Pardus/node_modules/discord.js/src/client/websocket/WebSocketConnection.js:296:17)
+    at WebSocket.onMessage (/root/Pardus/node_modules/ws/lib/event-target.js:120:16)
+    at WebSocket.emit (events.js:193:13)
+    at Receiver.receiverOnMessage (/root/Pardus/node_modules/ws/lib/websocket.js:789:20)
+    at Receiver.emit (events.js:193:13)
+    at Receiver.dataMessage (/root/Pardus/node_modules/ws/lib/receiver.js:422:14)
+    at Receiver.getData (/root/Pardus/node_modules/ws/lib/receiver.js:352:17)
+    at Receiver.startLoop (/root/Pardus/node_modules/ws/lib/receiver.js:138:22)
+    at Receiver._write (/root/Pardus/node_modules/ws/lib/receiver.js:74:10)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)
+ReferenceError: guild is not defined
+    at module.exports (/root/Pardus/events/message.js:7:87)
+    at CSClient.emit (events.js:193:13)
+    at MessageCreateHandler.handle (/root/Pardus/node_modules/discord.js/src/client/websocket/packets/handlers/MessageCreate.js:9:34)
+    at WebSocketPacketManager.handle (/root/Pardus/node_modules/discord.js/src/client/websocket/packets/WebSocketPacketManager.js:105:65)
+    at WebSocketConnection.onPacket (/root/Pardus/node_modules/discord.js/src/client/websocket/WebSocketConnection.js:333:35)
+    at WebSocketConnection.onMessage (/root/Pardus/node_modules/discord.js/src/client/websocket/WebSocketConnection.js:296:17)
+    at WebSocket.onMessage (/root/Pardus/node_modules/ws/lib/event-target.js:120:16)
+    at WebSocket.emit (events.js:193:13)
+    at Receiver.receiverOnMessage (/root/Pardus/node_modules/ws/lib/websocket.js:789:20)
+    at Receiver.emit (events.js:193:13)
+    at Receiver.dataMessage (/root/Pardus/node_modules/ws/lib/receiver.js:422:14)
+    at Receiver.getData (/root/Pardus/node_modules/ws/lib/receiver.js:352:17)
+    at Receiver.startLoop (/root/Pardus/node_modules/ws/lib/receiver.js:138:22)
+    at Receiver._write (/root/Pardus/node_modules/ws/lib/receiver.js:74:10)
+    at doWrite (_stream_writable.js:415:12)
+    at writeOrBuffer (_stream_writable.js:399:5)

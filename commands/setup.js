@@ -19,21 +19,33 @@ class Setup extends CTemp {
 		const toSetup = args[0].toLowerCase();
 		if(toSetup === "welcomemessage") {
 			if(!args[1]) return ErrorMsg(this.bot, message, "You need to provide a channel!");
-			const channel = findChannel(message.mentions.channels.first() || args[1]);
+			if(args[1] === "disable") {
+				guild.welcome.enabled = false;
+				return guild.save().catch(console.error);
+			}
+			const channel = findChannel(message, args[1]);
 			if(!channel) return ErrorMsg(this.bot, message, "Couldn't find that channel!");
-			guild.welcomeChannel = channel.id;
+			guild.welcome.channel = channel.id;
 			if(!args[2]) return;
-			guild.welcomeMessage = args.slice(2).join(" ");
-			message.reply(`Sucessfully set the WelcomeMessage to ${args.slice(2).join(" ")} and the LeaveChannel to ${channel.name}!`);
+			guild.welcome.enabled = true;
+			guild.welcome.message = args.slice(2).join(" ");
+			guild.save().catch(console.error);
+			message.reply(`Sucessfully set the WelcomeMessage to ${args.slice(2).join(" ")} and the WelcomeChannel to ${channel.name}!`);
 
 		}
 		else if(toSetup === "leavemessage") {
 			if(!args[1]) return ErrorMsg(this.bot, message, "You need to provide a channel!");
-			const channel = findChannel(message.mentions.channels.first() || args[1]);
+			if(args[1] === "disable") {
+				guild.leave.enabled = false;
+				return guild.save().catch(console.error);
+			}
+			const channel = findChannel(message, args[1]);
 			if(!channel) return ErrorMsg(this.bot, message, "Couldn't find that channel!");
-			guild.leaveChannel = channel.id;
+			guild.leave.channel = channel.id;
 			if(!args[2]) return;
-			guild.leaveMessage = args.slice(2).join(" ");
+			guild.leave.enabled = true;
+			guild.leave.message = args.slice(2).join(" ");
+			guild.save().catch(console.error);
 			message.reply(`Sucessfully set the LeaveMessage to ${args.slice(2).join(" ")} and the LeaveChannel to ${channel.name}!`);
 		}
 		else if(toSetup === "autorole") {
@@ -44,7 +56,7 @@ class Setup extends CTemp {
 			if(args[1].toLowerCase() === "remove") {
 				if(!guild.autoroles.includes(role.id)) return ErrorMsg(this.bot, message, "That role isn't set up as an auto role!");
 				guild.autoroles = guild.autoroles.splice(guild.autorole.findIndex((x) => x === role.id));
-				guild.save().catch();
+				guild.save().catch(console.error);
 				message.reply("Successfully removed the role " + role.name + "!");
 			}
 			if(args[1].toLowerCase() === "add") {

@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 config({
 	path: `${__dirname}/.env`,
 });
-mongoose.connect(process.env.LOGINURI, { useNewUrlParser: true });
+mongoose.connect(process.env.LOGINURI, { useNewUrlParser: true, useUnifiedTopology: true });
 Array.prototype.random = function(count) {
 	let arr = this;
 	if (count === undefined) return arr[Math.floor(Math.random() * arr.length)];

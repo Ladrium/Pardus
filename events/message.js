@@ -4,7 +4,6 @@ module.exports = async (bot, message) => {
 	if(!message.guild) return;
 	if(!message.guild.me.hasPermission("SEND_MESSAGES")) return;
 	if(message.author.bot) return;
-	if(message.isMentioned(bot.user) && message.content.includes("help")) return message.channel.send(bot.helpEmbed);
 	let guild = await Guild.findOne({ guildID: message.guild.id });
 	if(!guild) {
 		guild = new Guild({
@@ -28,6 +27,7 @@ module.exports = async (bot, message) => {
 		guild.save().catch(console.error);
 	}
 	const prefix = guild.prefix;
+	if(message.isMentioned(bot.user)) return message.channel.send(`The Guild prefix is ${prefix}, write ${prefix}help for more informations`);
 	if(!message.content.startsWith(prefix)) return;
 	if(!message.member) message.member = message.guild.fetchMember(message.author);
 	if(!message.guild.me.hasPermission("ADMINISTRATOR")) return message.reply("I need the permission: Administrator !!");
