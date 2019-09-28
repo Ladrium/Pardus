@@ -25,8 +25,8 @@ module.exports = class Stats extends CTemp {
             **Server Prefix:** ${guild.prefix}
             **Created At:** ${utc(this.bot.user.createdAt).format("dddd, MM Do YYYY")}
             **Language:** JavaScript - Discord.Js`)
-			.addField("Statistics", `**Api Ping:** ${this.bot.ping}
-             **Response Time:** ${msg.createdTimestamp - Date.now()}
+			.addField("Statistics", `**Api Ping:** ${Math.floor(this.bot.ping)}ms
+             **Response Time:** ${Date.now() - msg.createdTimestamp}ms
              **Guild Count:** ${this.bot.guilds.size}
              **Channel Count:** ${this.bot.channels.filter(x => x.type !== "category").size}
              **Category Count:** ${this.bot.channels.filter(x => x.type === "category").size}

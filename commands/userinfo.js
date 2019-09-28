@@ -1,7 +1,7 @@
 const Command = require("../base/Command");
 const moment = require("moment");
 const User = require("../models/users");
-module.exports = class Template extends Command {
+module.exports = class UserInfo extends Command {
 	constructor(bot) {
 		super(bot, {
 			name:"userinfo",
