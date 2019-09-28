@@ -4,9 +4,8 @@ module.exports = {
 		let member;
 		if(message.mentions && message.mentions.members.size == 0 && message.mentions.users.size > 0) {
 			const toFetch = await message.guild.fetchMember(message.mentions.users.first());
-			member = toFetch;
+			return toFetch;
 		}
-
 		else{
 			if(!toFind) return message.member;
 			toFind = toFind.toLowerCase();

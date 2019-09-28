@@ -1,6 +1,6 @@
-const wait = require("util").promisify(setTimeout);
-module.exports = async (bot) => {
-	await wait(5000);
+const Mutes = require("../models/mutes");
+const Guild = require("../models/guildSettings");
+module.exports = (bot) => {
 	setInterval(() =>
 		setStatus(["my Master", "the Admins"]), 60000);
 	bot.helpEmbed = bot.botEmbed(undefined, bot)
@@ -45,5 +45,27 @@ module.exports = async (bot) => {
 			});
 		}
 	}
+	setInterval(async () => {
+		const mutes = await Mutes.find({});
+		for(const mute of mutes) {
+			if(mute.created + mute.muteTime <= Date.now()) {
+				const guild = bot.guilds.get(mute.guildID);
+				if(!guild) return;
+				const member = guild.members.get(mute.userID);
+				if(!member) return;
+				let muteRole = guild.roles.find((x) => x.name === "muted");
+				if(!muteRole) muteRole = guild.createRole({ name:"muted", color:"#27272b", permissions:[] });
+				if(!member.roles.has(muteRole.id)) return;
+				member.removeRole(muteRole);
+				const logGuild = await Guild.findOne({ guildID: mute.guildID });
+				const logChannel = guild.channels.get(logGuild.logChannel);
+				if(!logChannel) return;
+				logChannel.send(`Unmuted ${member.user}!`);
+				Mutes.deleteOne({ userID: member.user.id, guildID: guild.id }, err => {
+					if(err) console.log(err);
+				});
+			}
+		}
+	}, 10000);
 	console.log("I'm not online >:)");
 };

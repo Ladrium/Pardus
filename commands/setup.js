@@ -64,7 +64,6 @@ class Setup extends CTemp {
 				guild.autoroles = [...guild.autoroles, role.id];
 				guild.save().catch(console.error);
 				message.reply("Successfully added the role " + role.name + "!");
-
 			}
 		}
 		else if(toSetup === "staffrole") {
