@@ -14,7 +14,7 @@
     "discord.js": "^11.5.1",
     "dotenv": "^8.1.0",
     "fs": "0.0.1-security",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.6.5",
     "node-fetch": "^2.6.0"
   }
